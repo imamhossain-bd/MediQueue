@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('hospitals', function (Blueprint $table) {
              $table->id();
+            $table->string('image')->nullable();
             $table->string('name');
+            $table->string('type')->default('privete'); // Default type is 'privete'
             $table->string('address');
             $table->string('district');
             $table->string('contact')->nullable();
