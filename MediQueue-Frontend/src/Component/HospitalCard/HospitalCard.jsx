@@ -5,14 +5,10 @@ import { Phone, MapPin, Star } from 'lucide-react';
 const HospitalCard = ({hospital}) => {
     return (
         <div>
-            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-80 w-full flex flex-col">
+            <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-[450px] w-full flex flex-col">
             {/* Image Container with Gradient Overlay */}
-            <div className="relative h-32 overflow-hidden flex-shrink-0">
-                <img 
-                    src={hospital.image} 
-                    alt={hospital.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+            <div className="relative overflow-hidden flex-shrink-0">
+                <img src={hospital.image} alt={hospital.name} className="w-full h-[15rem] object-cover group-hover:scale-110 transition-transform duration-500"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 
                 {/* Rating Badge */}

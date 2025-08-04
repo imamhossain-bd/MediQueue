@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HospitalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,5 +19,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Hospital Routes
 Route::get('/hospitals', [HospitalController::class, 'index']);
+Route::get('/hospitals/{id}', [HospitalController::class, 'show']);
+
+
+// Doctor Routes
+Route::get('/doctors', [DoctorController::class, 'index']);
+Route::get('/doctors/{id}', [DoctorController::class, 'show']);
 
 

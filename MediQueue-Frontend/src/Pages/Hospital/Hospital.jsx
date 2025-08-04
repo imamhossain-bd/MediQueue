@@ -4,6 +4,10 @@ import HospitalCard from '../../Component/HospitalCard/HospitalCard';
 
 const Hospital = () => {
 
+    // Hsopital Search States
+    const [searchLocation, setSearchLocation] = useState('');
+    const [searchHospitalName, setSearchHospitalName] = useState('');
+
     const [hospitals, setHospitals] = useState([]);
 
     useEffect(() => {
@@ -13,6 +17,14 @@ const Hospital = () => {
         }
         fetchHospitals();
     },[])
+
+    // Filter hospitals based on search criteria
+    const filteredHospitals = hospitals.filter(hospital => {
+        const matchLocation = hospital.district.toLowerCase().includes(searchLocation.toLowerCase());
+        const matchName = hospital.name.toLowerCase().includes(searchHospitalName.toLowerCase());
+        return matchLocation && matchName;
+    })
+    
 
 
     return (
@@ -36,7 +48,7 @@ const Hospital = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
                                             </div>
-                                            <input type="text" placeholder="Enter your location" className="w-full pl-10 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"/>
+                                            <input type="text" placeholder="Enter your location" value={searchLocation} onChange={(e) => setSearchLocation(e.target.value)} className="w-full pl-10 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"/>
                                         </div>
                                     </div>
 
@@ -67,7 +79,7 @@ const Hospital = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                                 </svg>
                                             </div>
-                                            <input type="text" placeholder="Hospital name " className="w-full pl-10 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"/>
+                                            <input type="text" placeholder="Hospital name" value={searchHospitalName} onChange={(e) => setSearchHospitalName(e.target.value)} className="w-full pl-10 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"/>
                                         </div>
                                     </div>
 
@@ -90,7 +102,7 @@ const Hospital = () => {
             <div className='flex-1 py-12 bg-gray-50'>
                 <div className='w-[85rem] mx-auto px-4 sm:px-6 lg:px-8'>
                     <div className='flex justify-between items-center mb-8'>
-                        <h2 className='text-2xl font-bold text-gray-900'>{hospitals.length} Hospitals Found</h2>
+                        <h2 className='text-2xl font-bold text-gray-900'>{filteredHospitals.length} Hospitals Found</h2>
                         <button className='justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 flex items-center rounded-xl'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4 mr-2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
                             Filters
@@ -99,7 +111,7 @@ const Hospital = () => {
                     <div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                             {
-                                hospitals.map(hospital =>(
+                                filteredHospitals.map(hospital =>(
                                     <HospitalCard key={hospital.id} hospital={hospital}></HospitalCard>
                                 ))
                             }
