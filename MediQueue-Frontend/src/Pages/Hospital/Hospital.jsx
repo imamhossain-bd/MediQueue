@@ -12,7 +12,7 @@ const Hospital = () => {
 
     useEffect(() => {
         const fetchHospitals = async () =>{
-            const res = await api.get('/');
+            const res = await api.get('/hospitals');
             setHospitals(res.data.hospitals);
         }
         fetchHospitals();

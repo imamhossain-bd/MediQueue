@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Call the HospitalSeeder to seed hospitals
-
         $this->call(HospitalSeeder::class);
+        $this->call(SpecialitySeeder::class); 
+        $this->call(DoctorSeeder::class);
     }
 }
