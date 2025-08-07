@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HospitalController;
@@ -26,4 +27,11 @@ Route::get('/hospitals/{id}', [HospitalController::class, 'show']);
 Route::get('/doctors', [DoctorController::class, 'index']);
 Route::get('/doctors/{id}', [DoctorController::class, 'show']);
 
+
+
+// Appointment Routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/appointments', [AppointmentController::class, 'store']);
+    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments']);
+});
 
