@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const DoctorsCard = ({ doctor }) => {
     return (
@@ -71,18 +72,18 @@ const DoctorsCard = ({ doctor }) => {
             </div>
 
             <div className="mt-6 relative flex gap-4 items-center z-10">
-                <button className="w-full bg-emerald-600 text-white font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
+                <NavLink to={"/appointments"} className="w-full bg-emerald-600 text-white text-center font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
                     <span className="relative z-10">Book Now</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                     {/* Ripple effect */}
                     <div className="absolute inset-0 bg-emerald-400 rounded-lg transform scale-0 group-hover:scale-100 opacity-20 transition-transform duration-300"></div>
-                </button>
-                 <button className="w-full bg-emerald-600 text-white font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
+                </NavLink>
+                <NavLink to={'#'} className="w-full bg-emerald-600 text-white text-center font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
                     <span className="relative z-10">Dr Details</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                     {/* Ripple effect */}
                     <div className="absolute inset-0 bg-emerald-400 rounded-lg transform scale-0 group-hover:scale-100 opacity-20 transition-transform duration-300"></div>
-                </button>
+                </NavLink>
             </div>
         </div>
     );
