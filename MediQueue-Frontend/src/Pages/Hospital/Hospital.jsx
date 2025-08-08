@@ -32,9 +32,9 @@ const Hospital = () => {
             {/* Find Section */}
             <div className='bg-gradient-to-r from-blue-600 to-indigo-700 py-20'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-                    <h2 className='text-4xl lg:ml-[-80px] font-bold text-white mb-6'>Find Hospitals</h2>
+                    <h2 className='text-4xl lg:ml-[-50px] font-bold text-white mb-6'>Find Hospitals</h2>
                     {/* Search Section */}
-                    <div className="bg-white w-[85rem] lg:ml-[-70px] ml-[0px] rounded-3xl shadow-xl">
+                    <div className="bg-white lg:ml-[-50px] ml-[0px] rounded-3xl shadow-xl">
                         <div className="w-[82rem] mx-auto">
                             <div className="bg-gray-50 rounded-3xl p-8 shadow-lg">
                                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-end">

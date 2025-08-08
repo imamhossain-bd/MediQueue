@@ -113,7 +113,7 @@ const Appointments = () => {
                 <div className="grid lg:grid-cols-3 gap-8">
                     {/* Main Form */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+                        <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 {/* Hospital Selection */}
                                 <div>
@@ -121,12 +121,8 @@ const Appointments = () => {
                                         <MapPin className="w-5 h-5 mr-2 text-blue-500" />
                                         Select Hospital
                                     </label>
-                                    <select
-                                        value={hospitalId}
-                                        onChange={e => setHospitalId(e.target.value)}
-                                        className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-300 bg-gray-50 hover:bg-white text-gray-700"
-                                        required
-                                    >
+                                    <select value={hospitalId} onChange={e => setHospitalId(e.target.value)} className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-300 bg-gray-50 hover:bg-white text-gray-700"
+                                        required>
                                         <option value="">Select Hospital</option>
                                         {hospitals.map(h => (
                                         <option key={h.id} value={h.id}>{h.name}</option>
@@ -141,13 +137,8 @@ const Appointments = () => {
                                         Search Doctor
                                     </label>
                                     <div className="relative">
-                                        <input
-                                            type="text"
-                                            placeholder="Search by name or specialty..."
-                                            value={searchDoctor}
-                                            onChange={e => setSearchDoctor(e.target.value)}
-                                            className="w-full border-2 border-gray-200 p-4 pl-12 rounded-xl focus:border-green-500 focus:ring-0 transition-all duration-300 bg-gray-50 hover:bg-white text-gray-700"
-                                        />
+                                        <input type="text" placeholder="Search by name or specialty..." value={searchDoctor} onChange={e => setSearchDoctor(e.target.value)}
+                                            className="w-full border-2 border-gray-200 p-4 pl-12 rounded-xl focus:border-green-500 focus:ring-0 transition-all duration-300 bg-gray-50 hover:bg-white text-gray-700"/>
                                         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                                     </div>
                                 </div>
@@ -160,15 +151,12 @@ const Appointments = () => {
                                     </label>
                                     <div className="space-y-3 max-h-64 overflow-y-auto">
                                         {filteredDoctors.map(d => (
-                                            <div 
-                                                key={d.id}
-                                                className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 ${
+                                            <div key={d.id} className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 ${
                                                     parseInt(doctorId) === d.id 
                                                         ? 'border-purple-500 bg-purple-50' 
                                                         : 'border-gray-200 hover:border-purple-300 bg-gray-50'
                                                 }`}
-                                                onClick={() => setDoctorId(d.id.toString())}
-                                            >
+                                                onClick={() => setDoctorId(d.id.toString())} >
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1">
                                                         <div className="flex items-center mb-2">
@@ -182,13 +170,8 @@ const Appointments = () => {
                                                         <p className="text-gray-500 text-sm">{d.hospital.name}</p>
                                                         <p className="text-gray-500 text-xs">{d.experience} experience</p>
                                                     </div>
-                                                    <input
-                                                        type="radio"
-                                                        name="doctor"
-                                                        checked={parseInt(doctorId) === d.id}
-                                                        onChange={() => setDoctorId(d.id.toString())}
-                                                        className="text-purple-600"
-                                                    />
+                                                    <input type="radio" name="doctor" checked={parseInt(doctorId) === d.id} onChange={() => setDoctorId(d.id.toString())}
+                                                    className="text-purple-600"/>
                                                 </div>
                                             </div>
                                         ))}
