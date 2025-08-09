@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    // Register function
     public function register(Request $request){
         $request->validate([
             'name' => 'requires|string|max:255',
@@ -23,11 +25,15 @@ class AuthController extends Controller
             'role'          => $request->role,
         ]);
 
+        $user->assignRole($request->role);
+
         $token = $user->createToken('api_token')->plainTextToken;
 
         return response()->json(['token' => $token, 'user'=> $user] + ['message' => 'User resistered successfully'], 201);
     }
 
+
+    // Login function
 
     public function login(Request $request){
         $request->validate([
@@ -48,6 +54,8 @@ class AuthController extends Controller
     }
 
 
+
+    // Logout function
     public function logout(Request $request){
         $user = $request->user();
 

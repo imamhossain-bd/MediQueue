@@ -67,7 +67,7 @@ const Navbar = () => {
 
             {/* Login Button */}
               <div className='flex items-center gap-4'>
-                <button onClick={openLoginModal} className="px-6 py-2 rounded-lg text-white text-lg font-medium bg-gradient-to-r from-gray-900 to-blue-600 hover:from-blue-600 hover:to-gray-900 transition-all duration-1000 ease-in-out">Login</button>
+                <NavLink to={'/login'} className="px-6 py-2 rounded-lg text-white text-lg font-medium bg-gradient-to-r from-gray-900 to-blue-600 hover:from-blue-600 hover:to-gray-900 transition-all duration-1000 ease-in-out">Login</NavLink>
               </div>
           </div>
         </nav>

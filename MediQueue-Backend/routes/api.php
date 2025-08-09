@@ -8,15 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+
 // Authentication routesRoute::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [AuthController::class, 'profile']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Example: Only Admin
+    Route::middleware('role:admin')->get('/admin-only', function () {
+        return "This is admin route";
+    });
+
+    // Example: Only Doctor
+    Route::middleware('role:doctor')->get('/doctor-only', function () {
+        return "This is doctor route";
+    });
+});
 
 // Hospital Routes
 Route::get('/hospitals', [HospitalController::class, 'index']);
@@ -34,4 +44,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/appointments', [AppointmentController::class, 'store']);
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments']);
 });
+
+
 
