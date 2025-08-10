@@ -154,12 +154,12 @@ const Login = () => {
               <p className="text-gray-600">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}
                 <button onClick={() => {
-        if (isLogin) {
-          navigate('/register');
-        } else {
-          navigate('/login');
-        }
-      }} className="ml-2 text-pink-500 hover:underline font-medium">
+                    if (isLogin) {
+                      navigate('/register');
+                    } else {
+                      navigate('/login');
+                    }
+                  }} className="ml-2 text-pink-500 hover:underline font-medium">
                   {isLogin ? 'Sign up now' : 'Sign in instead'}
                 </button>
               </p>
