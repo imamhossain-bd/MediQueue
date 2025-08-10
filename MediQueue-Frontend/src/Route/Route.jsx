@@ -9,6 +9,7 @@ import Reviews from '../Pages/Reviews/Reviews';
 import MyAppointments from '../Pages/MyAppointments/MyAppointments';
 import Login from '../Pages/Auth/Login';
 import Register from '../Pages/Auth/Register';
+import DoctorsDetails from '../Component/DoctorsCard/DoctorsDetails';
 
 const Route = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const Route = createBrowserRouter([
             {
                 path: '/reviews',
                 element: <Reviews></Reviews>
+            },
+            {
+                path: '/doctors-details/:id',
+                element: <DoctorsDetails></DoctorsDetails>
             },
             {
                 path: '/login',

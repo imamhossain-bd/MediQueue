@@ -78,7 +78,7 @@ const DoctorsCard = ({ doctor }) => {
                     {/* Ripple effect */}
                     <div className="absolute inset-0 bg-emerald-400 rounded-lg transform scale-0 group-hover:scale-100 opacity-20 transition-transform duration-300"></div>
                 </NavLink>
-                <NavLink to={'#'} className="w-full bg-emerald-600 text-white text-center font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
+                <NavLink to={`/doctors-details/${doctor.id}`} className="w-full bg-emerald-600 text-white text-center font-medium py-3 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl relative overflow-hidden group animate-slideInUp">
                     <span className="relative z-10">Dr Details</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                     {/* Ripple effect */}
