@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Shield, Sparkles, Stethoscope } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,13 +16,11 @@ const Register = () => {
     confirmPassword: ''
   });
 
-  const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrors({});
     setTimeout(() => {
       setMessage('Registration successful! Please log in.');
       setIsLoading(false);
@@ -34,19 +33,22 @@ const Register = () => {
       <div className="absolute top-20 left-20 w-32 h-32 bg-pink-200 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute bottom-32 right-20 w-48 h-48 bg-purple-200 rounded-full blur-3xl opacity-50"></div>
 
+      {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
 
           {/* Left Section */}
           <div className="space-y-8 lg:pr-12">
-            {/* Logo + Brand */}
+            {/* Logo */}
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Stethoscope className="w-7 h-7 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-800">
-                HealthCare Pro
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-800">HealthCare Pro</h1>
             </div>
 
             {/* Heading */}
@@ -89,12 +91,8 @@ const Register = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full mb-4 shadow-md">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Join Us Today
-              </h2>
-              <p className="text-gray-500">
-                Create your account to get started
-              </p>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Join Us Today</h2>
+              <p className="text-gray-500">Create your account to get started</p>
             </div>
 
             <form onSubmit={handleRegisterSubmit} className="space-y-6">
@@ -168,13 +166,13 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full py-3 rounded-xl font-semibold text-white ${ isLoading ? 'bg-gray-400' : 'bg-gradient-to-r from-gray-900 to-blue-600 hover:from-blue-600 hover:to-gray-900 transition-all duration-700'}`}
+                className={`w-full py-3 rounded-xl font-semibold text-white ${isLoading ? 'bg-gray-400' : 'bg-gradient-to-r from-gray-900 to-blue-600 hover:from-blue-600 hover:to-gray-900 transition-all duration-700'}`}
               >
                 {isLoading ? 'Creating account...' : 'Sign Up'}
               </button>
             </form>
 
-            {/* Message */}
+            {/* Success Message */}
             {message && (
               <div className="mt-6 p-4 bg-green-100 border border-green-300 rounded-xl text-green-800 text-center">
                 {message}
@@ -194,8 +192,7 @@ const Register = () => {
               </p>
             </div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </div>
   );
