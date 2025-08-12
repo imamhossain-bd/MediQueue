@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Shield, Sparkles, Stethoscope } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import api from '../Api/axios';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
 
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
 
-  const handleLoginSubmit = (e) => {
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setErrors({});
@@ -20,7 +25,22 @@ const Login = () => {
       setMessage('Login successful! Welcome back.');
       setIsLoading(false);
     }, 2000);
+
+    try{
+      await api.get('/sanctum/csrf-cookie');
+      const res = await api.post('/login', { email, password });
+      console.log(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      navigate("/");
+    }catch(err){
+      console.error(err);
+    }
+
+
   };
+
+
+
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 to-pink-50">
@@ -97,14 +117,8 @@ const Login = () => {
                 {/* Email */}
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    value={loginData.email}
-                    onChange={e => setLoginData({ ...loginData, email: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
-                    required
-                  />
+                  <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
+                  required/>
                 </div>
 
                 {/* Password */}
@@ -113,16 +127,12 @@ const Login = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
-                    value={loginData.password}
-                    onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500"
-                  >
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500">
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>

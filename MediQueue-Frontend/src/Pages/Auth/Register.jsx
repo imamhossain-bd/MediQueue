@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Shield, Sparkles, Stethoscope } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
+import api from '../Api/axios';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("patient");
 
   const [registerData, setRegisterData] = useState({
     name: '',
@@ -18,13 +24,29 @@ const Register = () => {
 
   const [message, setMessage] = useState('');
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
       setMessage('Registration successful! Please log in.');
       setIsLoading(false);
     }, 2000);
+
+    try {
+      await api.get("/sanctum/csrf-cookie");
+      const res = await api.post("/register", {
+        name,
+        email,
+        password,
+        role
+      });
+      console.log(res.data);
+
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      navigate("/");
+    } catch (err) {
+      console.error(err.response.data);
+    }
   };
 
   return (
@@ -102,8 +124,8 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Full Name"
-                  value={registerData.name}
-                  onChange={e => setRegisterData({ ...registerData, name: e.target.value })}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
                   required
                 />
@@ -115,8 +137,8 @@ const Register = () => {
                 <input
                   type="email"
                   placeholder="Email address"
-                  value={registerData.email}
-                  onChange={e => setRegisterData({ ...registerData, email: e.target.value })}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
                   required
                 />
@@ -128,16 +150,12 @@ const Register = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
-                  value={registerData.password}
-                  onChange={e => setRegisterData({ ...registerData, password: e.target.value })}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
                   required
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500"
-                >
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500">
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
@@ -148,8 +166,8 @@ const Register = () => {
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="Confirm Password"
-                  value={registerData.confirmPassword}
-                  onChange={e => setRegisterData({ ...registerData, confirmPassword: e.target.value })}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800"
                   required
                 />
