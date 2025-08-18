@@ -53,6 +53,20 @@ const Route = createBrowserRouter([
                 element: <Register></Register>
             }
         ]
+    },
+    {
+        path: '/dashboard',
+        element: <Layoutdashboard/>,
+        children: [
+            {
+                path: 'dashboardhome',
+                element: <DashboardHome />
+            },
+            {
+                path: 'dashboardproperty',
+                element: <DashboardProperty />
+            }
+        ]
     }
 ])
 
