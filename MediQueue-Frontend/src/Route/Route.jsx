@@ -65,7 +65,11 @@ const Route = createBrowserRouter([
             {
                 path: 'dashboardproperty',
                 element: <DashboardProperty />
-            }
+            },
+            {
+                path: 'dashagents',
+                element: <DashAgents></DashAgents>
+            },
         ]
     }
 ])
